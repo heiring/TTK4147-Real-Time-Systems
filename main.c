@@ -6,6 +6,7 @@ void busy_wait(struct timespec t);
 void main(){
     struct timespec one_sec = {1,0};
     busy_wait(one_sec);
+    //yo
 }
 
 
