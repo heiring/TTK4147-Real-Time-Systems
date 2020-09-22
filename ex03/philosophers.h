@@ -1,0 +1,1 @@
+void dining_philosophers();
