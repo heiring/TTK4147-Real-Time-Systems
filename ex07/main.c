@@ -46,7 +46,7 @@ struct args {
 };
 
 // function to be executed by task
-void BRTT_response(void *arg)
+void BRTT_response(void *input)
 {
     int thread_ID = ((struct args*)input)->thread_ID;
 
@@ -79,11 +79,11 @@ int main(){
     char  str[20];
 
     sprintf(str,"BRTT_response_task");
-    for (thread_ID = 0; thread_ID < 3; thread_ID++) {
+    for (int ID = 0; ID < 3; ID++) {
         struct args *input = (struct args *)malloc(sizeof(struct args));
-	input->thread_ID = thread_ID;
-        rt_task_create(&response_task[thread_ID], str, 0, 50, T_CPU(1));
-        rt_task_start(&response_task[thread_ID], &BRTT_response, (void*)&thread_ID);
+	input->thread_ID = ID;
+        rt_task_create(&response_task[ID], str, 0, 50, T_CPU(1));
+        rt_task_start(&response_task[ID], &BRTT_response, (void *)input);
     }
 
     // for (int i = 0; i < 10; i++) {
